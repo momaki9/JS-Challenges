@@ -23,8 +23,13 @@ var runGame = function() {
 
     userChoice = userChoice.toUpperCase();
 
+    //TODO: enter logic to deal with user entering anything other than R, P, or S
+
+    window.alert(`The computer chose ${computerChoice}`);
+
     if (userChoice == computerChoice) {
         ties++;
+        localStorage.setItem('ties', ties);
         window.alert("It's a tie!")
     } else if (
         (userChoice === 'R' && computerChoice === 'S') ||
@@ -32,9 +37,11 @@ var runGame = function() {
         (userChoice === 'S' && computerChoice === 'P')
     ) {
         wins++
+        localStorage.setItem('wins', wins);
         window.alert("You've won!")
     } else {
         losses++;
+        localStorage.setItem('losses', losses);
         window.alert("You've lost!")
     }
 
@@ -50,3 +57,15 @@ var runGame = function() {
 
 var startBtn = document.getElementById('start-game');
 startBtn.addEventListener('click', runGame);
+
+var winStat = document.getElementById('wins');
+var storedWinStat = localStorage.getItem('wins');
+winStat.innerHTML = storedWinStat;
+
+var lossStat = document.getElementById('losses');
+var storedlossStat = localStorage.getItem('losses');
+lossStat.innerHTML = storedlossStat;
+
+var tieStat = document.getElementById('ties');
+var storedtieStat = localStorage.getItem('ties');
+tieStat.innerHTML = storedtieStat;

@@ -1,3 +1,15 @@
 h1 {
     color: blueviolet;
 }
+
+#start-game {
+    width: 330px;
+    height: 130px;
+    font-size: larger;
+    background-color: bisque;
+}
+
+#start-game:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+}

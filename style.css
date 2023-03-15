@@ -13,3 +13,24 @@ h1 {
     background-color: greenyellow;
     cursor: pointer;
 }
+
+#password-output {
+    border: 2px rgb(199, 198, 198) dashed;
+    width: 375px;
+    height: 200px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+#password-generator {
+    width: 330px;
+    height: 130px;
+    font-size: larger;
+    background-color: rgb(97, 127, 203);
+    color: rgb(242, 236, 225);
+}
+
+#password-generator:hover {
+    background-color: rgb(35, 9, 59);
+    cursor: pointer;
+}

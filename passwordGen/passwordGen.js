@@ -7,10 +7,11 @@ var generatePassword = function() {
 
     var possiblePassword = [];
 
-    var passwordLength = window.prompt("How many characters would you like your password to have?");
+    var passwordLength = window.prompt("Specify how many characters long. (Enter a number between 8 and 32)");
 
-    if (!passwordLength) {
-        return;
+    if (!passwordLength || passwordLength < 8 || passwordLength > 32) {
+        window.alert("Try again! Password length must be between 8 and 32");
+        return generatePassword();
     };
 
     var includeNums = window.confirm("Include numbers?");
@@ -37,15 +38,21 @@ var generatePassword = function() {
         possiblePassword = possiblePassword.concat(symbols);
     }
 
-    
-    
-}
+    var generatePass = [];
 
+    for (let index = 0; index < passwordLength; index++) {
+        var randomNumber = Math.floor(Math.random() * possiblePassword.length);
+
+
+        generatePass = generatePass.concat(possiblePassword[randomNumber])
+        
+    }
+
+    generatePass = generatePass.join('');
+
+    document.getElementById('password-output').innerHTML = generatePass;
+
+};
 
 var passGenBtn = document.getElementById('password-generator');
-
 passGenBtn.addEventListener("click", generatePassword);
-
-
-
-

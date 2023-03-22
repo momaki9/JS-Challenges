@@ -1,11 +1,19 @@
+// variables needed
 var startBtn = document.getElementById('start-btn');
 var timeEl = document.getElementById('game-time');
 var wordEl = document.getElementById('word');
+var ouputEl = document.getElementById("interactive");
+var numBlanks = 0;
+var chosenWord = "";
+var blankArray = [];
+var time = 0;
+var wins = 0;
+var losses = 0;
 
+// event listener triggered with start button
 startBtn.addEventListener('click', startTimer);
 
-var time = 10;
-
+// list of available words
 var words = [
     "JavaScript",
     "API",
@@ -39,64 +47,57 @@ function chooseRandomWord() {
 
 // write a function that runs a timer
 function startTimer() {
+    time = 10;
+    startBtn.disabled = true;
     guessWord();
-    var timeInterval = setInterval(function() {
+    var timeInterval = setInterval(function () {
         time--;
         timeEl.textContent = time;
-        // console.log(time);
-        if (time === 0) {
+        if (time <= 0) {
             clearInterval(timeInterval);
+            startBtn.disabled = false;
+            ouputEl.textContent = chosenWord;
         }
     }, 1000)
 };
 
 // write a function that takes the random word and hides it
-var ouputEl = document.getElementById("interactive");
+function guessWord() {
 
-function guessWord(){
-    var chosenWord = chooseRandomWord();
-    wordEl.textContent = chosenWord;
+    blankArray = [];
+    chosenWord = chooseRandomWord().toLowerCase();
     var letters = chosenWord.split('');
-    var arrayEl = chosenWord.split('');
-    console.log(letters);
-    for (let index = 0; index < letters.length; index++) {
-        var childEl = document.createElement('span');
-        var blank = "_";
-        letters[index] = blank;
-        childEl.textContent = letters[index];
-        childEl.setAttribute("class", "span-element");
-        childEl.setAttribute("aria-valuetext", arrayEl[index])
-        ouputEl.appendChild(childEl);
-        console.log(letters[index])
+    for (var i = 0; i < letters.length; i++) {
+      blankArray.push("_");
     }
-    // var key = keyEvent();
-    // console.log(key)
-    // var lettersAg = chosenWord.split('');
-    
-    document.addEventListener("keypress", function(event) {
-        var allSpans = document.querySelectorAll('.span-element');
-        // console.log(typeof allSpans)
-        // console.log(allSpans[2].ariaValueText)
-        // console.log(event.key)
-        // console.log(lettersAg)
-        for (let index = 0; index < allSpans.length; index++) {
-            // console.log(allSpans[index].ariaValueText)
-            if (allSpans[index].ariaValueText == event.key) {
-                console.log("good")
-                allSpans[index].textContent = event.key;
+    ouputEl.textContent = blankArray.join("");
+  
+    document.addEventListener("keypress", function (event) {
+        console.log(event.key);
+        var pressedKey = event.key.toLowerCase();
+        if (letters.includes(pressedKey)) {
+            for (var i = 0; i < letters.length; i++) {
+                if (letters[i] == pressedKey) {
+                    console.log(blankArray)
+                    blankArray[i] = letters[i];
+                }
             }
-            
+            ouputEl.textContent = blankArray.join("");
         }
-
+        if (!blankArray.includes("_")) {
+            wins++;
+        }
     });
-}
+
+};
+
+
+
 
 // write a function that processes the guessed letters from keyboard keys
-function keyEvent(event){
+function keyEvent(event) {
     console.log(event.key);
     return event.key;
 };
-
-// document.addEventListener("keypress", keyEvent);
 
 // make sure to account for capital letters

@@ -2,7 +2,6 @@ h1 {
     color: rgb(163, 50, 87);
 }
 
-.span-element {
-    padding: 2px;
-    margin: 2px;
+#interactive {
+    letter-spacing: 0.5em;
 }

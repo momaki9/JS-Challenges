@@ -1,4 +1,6 @@
 var startBtn = document.getElementById("quiz-start");
+var question = document.getElementById("quiz-question");
+var questionChoices = document.getElementById("quiz-choices");
 var questions = [
     {
       quest: "What does JS stand for?" ,
@@ -14,17 +16,42 @@ var questions = [
 
 var quizContent = document.getElementById("quiz-content");
 
-function doThis() {
+document.replaceChildren
+
+function questionOne() {
     console.log("I work");
     startBtn.hidden = true;
-    var question = document.createElement("h3");
+    // var question = document.createElement("h3");
     question.textContent = questions[0].quest;
-    quizContent.appendChild(question);
+    // quizContent.appendChild(question);
     for (let index = 0; index < questions[0].choices.length; index++) {
-        var answerChoice = document.createElement("h4");
+        var answerChoice = document.createElement("li");
+        answerChoice.setAttribute("id", "testing123")
         answerChoice.textContent = questions[0].choices[index];
-        quizContent.appendChild(answerChoice)
+        questionChoices.appendChild(answerChoice)
+    }
+    var nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next"
+    quizContent.appendChild(nextBtn);
+    nextBtn.addEventListener("click", emptyChoices)
+};
+
+var emptyChoices = function(){
+    console.log(questionChoices.children);
+    questionChoices.replaceChildren();
+    questionTwo();
+};
+
+function questionTwo() {
+    console.log("I work too");
+    // var question = document.createElement("h3");
+    question.textContent = questions[1].quest;
+    // quizContent.appendChild(question);
+    for (let index = 0; index < questions[1].choices.length; index++) {
+        var answerChoice = document.createElement("li");
+        answerChoice.textContent = questions[1].choices[index];
+        questionChoices.appendChild(answerChoice)
     }  
 };
 
-startBtn.addEventListener("click", doThis);
+startBtn.addEventListener("click", questionOne);
